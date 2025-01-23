@@ -1,0 +1,103 @@
+# File Integrity Checker
+
+## Overview
+The **File Integrity Checker** is a Python-based tool designed to monitor changes in files within a specified directory. It calculates SHA-256 hashes of files, saves them, and compares them over time to detect file creations, modifications, or deletions.
+
+---
+
+## Features
+- **File Hashing**: Uses SHA-256 to compute a unique hash for each file.
+- **Change Detection**: Identifies files that have been created, modified, or deleted.
+- **Persistent Storage**: Stores file hashes in a JSON file for future comparisons.
+- **Recursive Directory Scanning**: Scans all files in the given directory and its subdirectories.
+
+---
+
+## Prerequisites
+Ensure you have the following installed:
+- Python 3.7 or later
+
+---
+
+## Installation
+1. Clone or download this repository to your local machine.
+2. Install Python if it is not already installed. You can download it from [Python.org](https://www.python.org/).
+
+---
+
+## Usage
+1. Save the script as `file_integrity_checker.py`.
+2. Open a terminal or command prompt.
+3. Run the script:
+   ```bash
+   python file_integrity_checker.py
+   ```
+4. Enter the directory you wish to monitor when prompted.
+
+---
+
+## Functional Details
+### Class: `FileIntegrityChecker`
+This class manages all the core functionality of the tool.
+
+#### Methods:
+- **`__init__(self, directory, hash_file="file_hashes.json")`**
+  - Initializes the checker with a target directory and a JSON file to store hashes.
+
+- **`calculate_hash(self, file_path)`**
+  - Computes the SHA-256 hash of a given file.
+
+- **`scan_files(self)`**
+  - Scans all files in the directory and computes their hashes.
+
+- **`save_hashes(self, file_hashes)`**
+  - Saves computed file hashes to a JSON file.
+
+- **`load_hashes(self)`**
+  - Loads previously stored file hashes from the JSON file.
+
+- **`check_integrity(self)`**
+  - Compares the current file hashes with the saved hashes to identify changes.
+
+### Outputs
+1. **Created Files**: Lists new files detected in the directory.
+2. **Modified Files**: Lists files whose contents have changed.
+3. **Deleted Files**: Lists files that were removed from the directory.
+4. **Updated Hash File**: Saves the latest file hashes to the JSON file.
+
+---
+
+## Example Output
+```plaintext
+Enter the directory to monitor: ./example_directory
+
+Created files:
+  - ./example_directory/new_file.txt
+
+Modified files:
+  - ./example_directory/updated_file.txt
+
+Deleted files:
+  - ./example_directory/old_file.txt
+
+File hashes saved to file_hashes.json
+```
+
+---
+
+## Notes
+- The tool handles errors gracefully, such as issues with file reading or JSON file access.
+- If the JSON hash file does not exist, it starts fresh and creates one after the first scan.
+
+---
+
+## Potential Use Cases
+- **Security Monitoring**: Detect unauthorized changes to files.
+- **System Administration**: Track changes in configuration or critical directories.
+- **Backup Validation**: Ensure files have not been altered since the last backup.
+
+---
+
+## License
+This project is open-source and available under the MIT License.
+
